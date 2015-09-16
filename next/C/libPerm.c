@@ -39,11 +39,50 @@ void NextPermutation (int s, int *e)
 			exit (0);
 		}
 
-		MoveVectorLeft (i, e);
+		MoveVectorLeft (s, i, e);
 		tM = tt;
 		tt = e[i];
 	}
 	tt = e[i];
 	e[i] = e[s-1];
 	e[s-1] = tt;
+}
+
+int
+/*
+	necessari per a poder acabar el programa quan toca
+	0 correcte
+	1 final, no te sentit buscar el seguent quan ja no n'hi ha
+	2 resultat sense sentit ;-)
+*/
+NextPermutationV2 (int s, int *v)
+{
+	int i, j, tt, tM;
+
+	i = s-1;
+	tM = v[i];
+
+	while (i--)
+	{
+		tt = v[i];
+		if (tt < tM)
+		{
+			for (j = i +1; j < s; j++)
+			{
+				tM = v[j];
+				if (tt < tM)
+				{
+					v[i] = v[j];
+					v[j] = tt;
+					return 0; /* tot correcte */
+				}
+			}
+			return 2; /* si entres al condicional ja estas teoricament al final i esta assegurat */
+		} else
+		{
+			tM = tt;
+			MoveVectorLeft (s, i, v);
+		}
+	}
+return 1;
 }
