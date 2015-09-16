@@ -1,0 +1,9 @@
+# us del vim
+*.swp
+
+# sortida per defecte del c
+a.out
+*.o
+
+# Basura propia
+b
